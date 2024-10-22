@@ -14,7 +14,7 @@ wss.on('connection', (ws) => {
 
   //handle incoming messages from clients
   ws.on('message', (message) => {
-    console.log(`Received message => ${message}`);
+    console.log(`Received message: ${message}`);
 
     //broadcast the message to all clients
     wss.clients.forEach(client => {
