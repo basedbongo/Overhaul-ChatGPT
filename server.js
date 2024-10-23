@@ -11,16 +11,20 @@ wss.on('connection', (ws) => {
   console.log('New client connected!');
 
   ws.on('message', (message) => {
-    const [playerName, ...messageParts] = message.split(': ');
-    const playerMessage = messageParts.join(': ');
+    try {
+      const data = JSON.parse(message);
+      const playerName = data.player;
+      const msg = data.message;
+      console.log(`Received message from ${playerName}: ${msg}`);
 
-    console.log(`Received message from ${playerName}: ${playerMessage}`);
-
-    wss.clients.forEach(client => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(`${playerName}: ${playerMessage}`);
-      }
-    });
+      wss.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify({ player: playerName, message: msg }));
+        }
+      });
+    } catch (error) {
+      console.error("Error parsing message:", error);
+    }
   });
 
   ws.on('close', () => {
