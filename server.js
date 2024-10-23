@@ -18,9 +18,7 @@ wss.on('connection', (ws) => {
       console.log(`Received message from ${playerName}: ${msg}`);
 
       wss.clients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify({ player: playerName, message: msg }));
-        }
+        client.send(JSON.stringify({ player: playerName, message: msg }));
       });
     } catch (error) {
       console.error("Error parsing message:", error);
