@@ -7,8 +7,12 @@ const server = http.createServer(app);
 
 const wss = new WebSocket.Server({ server });
 
+const messageHistory = [];
+
 wss.on('connection', (ws) => {
   console.log('New client connected!');
+
+  ws.send(JSON.stringify({ history: messageHistory }));
 
   ws.on('message', (message) => {
     try {
@@ -16,6 +20,11 @@ wss.on('connection', (ws) => {
       const playerName = data.player;
       const msg = data.message;
       console.log(`Received message from ${playerName}: ${msg}`);
+
+      messageHistory.push({ player: playerName, message: msg });
+      if (messageHistory.length > 20) {
+        messageHistory.shift();
+      }
 
       wss.clients.forEach(client => {
         client.send(JSON.stringify({ player: playerName, message: msg }));
