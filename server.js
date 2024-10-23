@@ -11,11 +11,14 @@ wss.on('connection', (ws) => {
   console.log('New client connected!');
 
   ws.on('message', (message) => {
-    console.log(`Received message: ${message}`);
+    const [playerName, ...messageParts] = message.split(': ');
+    const playerMessage = messageParts.join(': ');
+
+    console.log(`Received message from ${playerName}: ${playerMessage}`);
 
     wss.clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(message);
+        client.send(`${playerName}: ${playerMessage}`);
       }
     });
   });
