@@ -1,1 +1,1 @@
-error("chaning obfuscators")
+error("changing obfuscators")
