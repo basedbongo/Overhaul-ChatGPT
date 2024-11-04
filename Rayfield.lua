@@ -187,9 +187,12 @@ local Debounce = false
 local Notifications = Rayfield.Notifications
 Notifications.Visible = false
 local NotificationsUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
+NotificationsUI.DisplayOrder = 1000
+NotificationsUI.IgnoreGuiInset = true
+NotificationsUI.ResetOnSpawn = false
 local NotificationsFrame = Notifications:Clone()
 NotificationsFrame.Parent = NotificationsUI
-NotificationsUI.Enabled = true; NotificationsFrame.Visible = false;
+NotificationsUI.Enabled = true; NotificationsFrame.Visible = true;
 
 local SelectedTheme = RayfieldLibrary.Theme.Default
 
