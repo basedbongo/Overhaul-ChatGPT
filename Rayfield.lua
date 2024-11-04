@@ -1585,7 +1585,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					DropdownOption.Visible = true
 
 					if DropdownSettings.CurrentOption == Option then
-						DropdownOption.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+						DropdownOption.BackgroundColor3 = Color3.fromRGB(20, 65, 70)
 					end
 
 					DropdownOption.BackgroundTransparency = 1
@@ -1640,7 +1640,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 								Dropdown.Selected.Text = DropdownSettings.CurrentOption[1]
 							end
 							TweenService:Create(DropdownOption.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-							TweenService:Create(DropdownOption, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(40, 40, 40)}):Play()
+							TweenService:Create(DropdownOption, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(20, 65, 70)}):Play()
 							Debounce = true
 							task.wait(0.2)
 							TweenService:Create(DropdownOption.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
@@ -1665,7 +1665,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 						for _, droption in ipairs(Dropdown.List:GetChildren()) do
 							if droption.ClassName == "Frame" and droption.Name ~= "Placeholder" and not table.find(DropdownSettings.CurrentOption, droption.Name) then
-								TweenService:Create(droption, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(30, 30, 30)}):Play()
+								TweenService:Create(droption, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(2, 67, 68)}):Play()
 							end
 						end
 						if not DropdownSettings.MultipleOptions then
@@ -1693,9 +1693,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 			for _, droption in ipairs(Dropdown.List:GetChildren()) do
 				if droption.ClassName == "Frame" and droption.Name ~= "Placeholder" then
 					if not table.find(DropdownSettings.CurrentOption, droption.Name) then
-						droption.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+						droption.BackgroundColor3 = Color3.fromRGB(2, 67, 68)
 					else
-						droption.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+						droption.BackgroundColor3 = Color3.fromRGB(20, 65, 70)
 					end
 				end
 			end
@@ -1742,9 +1742,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 				for _, droption in ipairs(Dropdown.List:GetChildren()) do
 					if droption.ClassName == "Frame" and droption.Name ~= "Placeholder" then
 						if not table.find(DropdownSettings.CurrentOption, droption.Name) then
-							droption.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+							droption.BackgroundColor3 = Color3.fromRGB(2, 67, 68)
 						else
-							droption.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+							droption.BackgroundColor3 = Color3.fromRGB(20, 65, 70)
 						end
 					end
 				end
