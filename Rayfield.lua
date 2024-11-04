@@ -183,7 +183,13 @@ local CEnabled = false
 local Minimised = false
 local Hidden = false
 local Debounce = false
+
 local Notifications = Rayfield.Notifications
+Notifications.Visible = false
+local NotificationsUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
+local NotificationsFrame = Notifications:Clone()
+NotificationsFrame.Parent = NotificationsUI
+NotificationsUI.Enabled = true; NotificationsFrame.Visible = false;
 
 local SelectedTheme = RayfieldLibrary.Theme.Default
 
@@ -291,10 +297,11 @@ end
 
 function RayfieldLibrary:Notify(data) -- action e.g open messages
 	task.spawn(function()
+
 		-- Notification Object Creation
-		local newNotification = Notifications.Template:Clone()
+		local newNotification = NotificationsFrame.Template:Clone()
 		newNotification.Name = data.Title or 'No Title Provided'
-		newNotification.Parent = Notifications
+		newNotification.Parent = NotificationsFrame
 		newNotification.LayoutOrder = #Notifications:GetChildren()
 		newNotification.Visible = false
 
@@ -905,7 +912,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	end
 
 	Notifications.Template.Visible = false
-	Notifications.Visible = true
 	Rayfield.Enabled = true
 	task.wait(0.5)
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
