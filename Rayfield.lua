@@ -23,42 +23,42 @@ local RayfieldLibrary = {
 	Theme = {
 		Default = {
 			TextFont = "Default", -- Default will use the various font faces used across Rayfield
-			TextColor = Color3.fromRGB(240, 240, 240),
-
-			Background = Color3.fromRGB(25, 25, 25),
-			Topbar = Color3.fromRGB(34, 34, 34),
-			Shadow = Color3.fromRGB(20, 20, 20),
-
-			NotificationBackground = Color3.fromRGB(20, 20, 20),
-			NotificationActionsBackground = Color3.fromRGB(230, 230, 230),
-
-			TabBackground = Color3.fromRGB(80, 80, 80),
-			TabStroke = Color3.fromRGB(85, 85, 85),
-			TabBackgroundSelected = Color3.fromRGB(210, 210, 210),
-			TabTextColor = Color3.fromRGB(240, 240, 240),
-			SelectedTabTextColor = Color3.fromRGB(50, 50, 50),
-
-			ElementBackground = Color3.fromRGB(35, 35, 35),
-			ElementBackgroundHover = Color3.fromRGB(40, 40, 40),
-			SecondaryElementBackground = Color3.fromRGB(25, 25, 25), -- For labels and paragraphs
-			ElementStroke = Color3.fromRGB(50, 50, 50),
-			SecondaryElementStroke = Color3.fromRGB(40, 40, 40), -- For labels and paragraphs
-
-			SliderBackground = Color3.fromRGB(43, 105, 159),
-			SliderProgress = Color3.fromRGB(43, 105, 159),
-			SliderStroke = Color3.fromRGB(48, 119, 177),
-
-			ToggleBackground = Color3.fromRGB(30, 30, 30),
-			ToggleEnabled = Color3.fromRGB(0, 146, 214),
-			ToggleDisabled = Color3.fromRGB(100, 100, 100),
-			ToggleEnabledStroke = Color3.fromRGB(0, 170, 255),
-			ToggleDisabledStroke = Color3.fromRGB(125, 125, 125),
-			ToggleEnabledOuterStroke = Color3.fromRGB(100, 100, 100),
-			ToggleDisabledOuterStroke = Color3.fromRGB(65, 65, 65),
-
-			InputBackground = Color3.fromRGB(30, 30, 30),
-			InputStroke = Color3.fromRGB(65, 65, 65),
-			PlaceholderColor = Color3.fromRGB(178, 178, 178)
+			TextColor = Color3.fromRGB(190, 235, 235), -- Light cyan for text (slightly softer than original)
+			
+			Background = Color3.fromRGB(1, 48, 50), -- Dark cyan background to match the UI panel
+			Topbar = Color3.fromRGB(1, 48, 50), -- Same as background for consistency with the UI
+			Shadow = Color3.fromRGB(10, 20, 25), -- Dark shadow effect (darker for depth)
+			
+			NotificationBackground = Color3.fromRGB(0, 40, 45), -- Slightly darker cyan for notification background
+			NotificationActionsBackground = Color3.fromRGB(0, 90, 95), -- Medium cyan for notification actions
+			
+			TabBackground = Color3.fromRGB(10, 50, 55), -- Dark cyan for tab background
+			TabStroke = Color3.fromRGB(30, 90, 95), -- Medium-dark cyan stroke for tabs
+			TabBackgroundSelected = Color3.fromRGB(0, 90, 95), -- More vibrant cyan for selected tab
+			TabTextColor = Color3.fromRGB(120, 200, 200), -- Softer light cyan for tab text
+			SelectedTabTextColor = Color3.fromRGB(150, 230, 230), -- More vibrant cyan for selected tab text
+			
+			ElementBackground = Color3.fromRGB(10, 50, 55), -- Dark cyan element background
+			ElementBackgroundHover = Color3.fromRGB(15, 60, 65), -- Slightly lighter on hover for interaction feedback
+			SecondaryElementBackground = Color3.fromRGB(5, 40, 45), -- Darker cyan for secondary elements (labels, paragraphs)
+			ElementStroke = Color3.fromRGB(20, 80, 85), -- Medium cyan stroke for elements
+			SecondaryElementStroke = Color3.fromRGB(15, 70, 75), -- Slightly lighter cyan for secondary strokes
+			
+			SliderBackground = Color3.fromRGB(1, 48, 50), -- Dark cyan for slider background (matches the main UI)
+			SliderProgress = Color3.fromRGB(0, 120, 130), -- Vibrant cyan for slider progress
+			SliderStroke = Color3.fromRGB(0, 80, 90), -- Cyan stroke for slider for better contrast
+			
+			ToggleBackground = Color3.fromRGB(5, 40, 45), -- Dark cyan for toggle background
+			ToggleEnabled = Color3.fromRGB(0, 150, 155), -- Bright cyan for enabled toggle
+			ToggleDisabled = Color3.fromRGB(50, 70, 75), -- Muted cyan for disabled toggle
+			ToggleEnabledStroke = Color3.fromRGB(0, 200, 210), -- Bright cyan stroke for enabled toggle
+			ToggleDisabledStroke = Color3.fromRGB(60, 90, 95), -- Muted cyan for disabled toggle stroke
+			ToggleEnabledOuterStroke = Color3.fromRGB(0, 100, 110), -- Dark cyan outer stroke for enabled toggle
+			ToggleDisabledOuterStroke = Color3.fromRGB(40, 60, 65), -- Darker muted cyan for disabled toggle outer stroke
+			
+			InputBackground = Color3.fromRGB(5, 50, 55), -- Dark cyan input background
+			InputStroke = Color3.fromRGB(0, 90, 95), -- Brighter cyan input stroke for visibility
+			PlaceholderColor = Color3.fromRGB(100, 130, 130) -- Soft light cyan for placeholder text
 		},
 		Light = {
 			TextFont = "Gotham", -- Default will use the various font faces used across Rayfield
