@@ -291,7 +291,7 @@ end
 
 function RayfieldLibrary:Notify(data) -- action e.g open messages
 	task.spawn(function()
-		
+		print("Creating notification:", data.Title)
 		-- Notification Object Creation
 		local newNotification = Notifications.Template:Clone()
 		newNotification.Name = data.Title or 'No Title Provided'
