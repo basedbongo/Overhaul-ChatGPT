@@ -291,7 +291,6 @@ end
 
 function RayfieldLibrary:Notify(data) -- action e.g open messages
 	task.spawn(function()
-		print("Creating notification:", data.Title)
 		-- Notification Object Creation
 		local newNotification = Notifications.Template:Clone()
 		newNotification.Name = data.Title or 'No Title Provided'
@@ -315,11 +314,6 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 		newNotification.Icon.BackgroundTransparency = 1
 
 		task.wait()
-		
-		if data.Actions then
-			warn('Rayfield | Not seeing your actions in notifications?')
-			print("Notification Actions are being sunset for now, keep up to date on when they're back in the discord. (sirius.menu/discord)")
-		end
 
 		-- Calculate textbounds and set initial values
 		local bounds = {newNotification.Title.TextBounds.Y, newNotification.Description.TextBounds.Y}
