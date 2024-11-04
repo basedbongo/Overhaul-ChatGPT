@@ -111,28 +111,12 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 
--- Environment Check
-local useStudio
-
-if RunService:IsStudio() then
-	useStudio = true
-end
-
 -- Interface Management
-local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://11380036235")[1]
+local Rayfield = game:GetObjects("rbxassetid://11380036235")[1]
 
 Rayfield.Enabled = false
 
-if gethui then
-	Rayfield.Parent = gethui()
-elseif syn and syn.protect_gui then 
-	syn.protect_gui(Rayfield)
-	Rayfield.Parent = CoreGui
-elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
-	Rayfield.Parent = CoreGui:FindFirstChild("RobloxGui")
-elseif not useStudio then
-	Rayfield.Parent = CoreGui
-end
+Rayfield.Parent = CoreGui
 
 if gethui then
 	for _, Interface in ipairs(gethui():GetChildren()) do
@@ -141,7 +125,7 @@ if gethui then
 			Interface.Name = "Rayfield-Old"
 		end
 	end
-elseif not useStudio then
+else
 	for _, Interface in ipairs(CoreGui:GetChildren()) do
 		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
 			Interface.Enabled = false
@@ -149,7 +133,6 @@ elseif not useStudio then
 		end
 	end
 end
-
 
 local minSize = Vector2.new(1024, 768)
 local useMobileSizing
