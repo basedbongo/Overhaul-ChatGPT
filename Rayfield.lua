@@ -1425,14 +1425,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					InputSettings.Callback(Input.InputFrame.InputBox.Text)
 				end)
 				if not Success then
-					TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-					TweenService:Create(Input.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-					Input.Title.Text = "Callback Error"
-					print("Rayfield | "..InputSettings.Name.." Callback Error " ..tostring(Response))
-					task.wait(0.5)
-					Input.Title.Text = InputSettings.Name
-					TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-					TweenService:Create(Input.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+					print("Callback Error: " ..tostring(Response))
 				end
 
 				if InputSettings.RemoveTextAfterFocusLost then
@@ -1635,14 +1628,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end)
  
 					if not Success then
-						TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-						TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
-						Dropdown.Title.Text = "Callback Error"
-						print("Rayfield | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
-						wait(0.5)
-						Dropdown.Title.Text = DropdownSettings.Name
-						TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-						TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
+						print("Callback Error: " ..tostring(Response))
 					end
  
 					for _, droption in ipairs(Dropdown.List:GetChildren()) do
@@ -1708,14 +1694,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					DropdownSettings.Callback(NewOption)
 				end)
 				if not Success then
-					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-					TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
-					Dropdown.Title.Text = "Callback Error"
-					print("Rayfield | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
-					wait(0.5)
-					Dropdown.Title.Text = DropdownSettings.Name
-					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-					TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
+					print("Callback Error: " ..tostring(Response))
 				end
  
 				for _, droption in ipairs(Dropdown.List:GetChildren()) do
@@ -1806,14 +1785,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					if not KeybindSettings.HoldToInteract then
 						local Success, Response = pcall(KeybindSettings.Callback)
 						if not Success then
-							TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-							TweenService:Create(Keybind.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-							Keybind.Title.Text = "Callback Error"
-							print("Rayfield | "..KeybindSettings.Name.." Callback Error " ..tostring(Response))
-							task.wait(0.5)
-							Keybind.Title.Text = KeybindSettings.Name
-							TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-							TweenService:Create(Keybind.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+							print("Callback Error: " ..tostring(Response))
 						end
 					else
 						task.wait(0.25)
@@ -1968,14 +1940,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					ToggleSettings.Callback(ToggleSettings.CurrentValue)
 				end)
 				if not Success then
-					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-					Toggle.Title.Text = "Callback Error"
-					print("Rayfield | "..ToggleSettings.Name.." Callback Error " ..tostring(Response))
-					task.wait(0.5)
-					Toggle.Title.Text = ToggleSettings.Name
-					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+					print("Callback Error: " ..tostring(Response))
 				end
 				SaveConfiguration()
 			end
@@ -2088,14 +2053,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 								SliderSettings.Callback(NewValue)
 							end)
 							if not Success then
-								TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-								TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-								Slider.Title.Text = "Callback Error"
-								print("Rayfield | "..SliderSettings.Name.." Callback Error " ..tostring(Response))
-								task.wait(0.5)
-								Slider.Title.Text = SliderSettings.Name
-								TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-								TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+								print("Callback Error: " ..tostring(Response))
 							end
 
 							SliderSettings.CurrentValue = NewValue
@@ -2115,14 +2073,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					SliderSettings.Callback(NewVal)
 				end)
 				if not Success then
-					TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-					TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-					Slider.Title.Text = "Callback Error"
-					print("Rayfield | "..SliderSettings.Name.." Callback Error " ..tostring(Response))
-					task.wait(0.5)
-					Slider.Title.Text = SliderSettings.Name
-					TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-					TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+					print("Callback Error: " ..tostring(Response))
 				end
 				SliderSettings.CurrentValue = NewVal
 				SaveConfiguration()
