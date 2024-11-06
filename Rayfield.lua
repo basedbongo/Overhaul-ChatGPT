@@ -1064,7 +1064,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Button.Interact.MouseButton1Click:Connect(function()
 				local Success, Response = pcall(ButtonSettings.Callback)
 				if not Success then
-					print("Callback Error " ..tostring(Response))
+					print("Callback Error: " ..tostring(Response))
 				else
 					SaveConfiguration()
 					TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
@@ -1927,14 +1927,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					ToggleSettings.Callback(ToggleSettings.CurrentValue)
 				end)
 				if not Success then
-					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-					Toggle.Title.Text = "Callback Error"
-					print("Rayfield | "..ToggleSettings.Name.." Callback Error " ..tostring(Response))
-					task.wait(0.5)
-					Toggle.Title.Text = ToggleSettings.Name
-					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+					print("Callback Error: " ..tostring(Response))
 				end
 
 
