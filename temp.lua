@@ -118,7 +118,7 @@ if RunService:IsStudio() then
 end
 
 -- Interface Management
-local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://10804731440")[1]
+local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://138479981673371")[1]
 
 Rayfield.Enabled = false
 
