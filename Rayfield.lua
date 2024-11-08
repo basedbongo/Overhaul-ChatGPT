@@ -165,7 +165,7 @@ end
 local Camera = workspace.CurrentCamera
 local Main = Rayfield.Main
 local MPrompt = Rayfield:FindFirstChild('Prompt')
-local Topbar = Main.Topbar
+local Topbar = Main:FindFirstChild("Topbar")
 local Elements = Main.Elements
 local LoadingFrame = Main.LoadingFrame
 local TabList = Main.TabList
@@ -722,7 +722,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	LoadingFrame.Title.Text = Settings.LoadingTitle or "Rayfield Interface Suite"
 	LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or "by Sirius"
 	if Settings.LoadingTitle ~= "Rayfield Interface Suite" then
-		LoadingFrame.Version.Text = "Rayfield UI"
+		LoadingFrame.Version.Text = "Rayfield Custom UI"
 	end
 	Topbar.Visible = false
 	Elements.Visible = false
