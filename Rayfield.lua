@@ -184,7 +184,15 @@ local Minimised = false
 local Hidden = false
 local Debounce = false
 local searchOpen = false
-local Notifications = Rayfield.Notifications
+
+---------------------------------------------------------------------------------------------------------------------------------------- IMPORTANT
+
+local Notifications = Rayfield.Notifications:Clone()
+local a = Instance.new("ScreenGui", game:GetService("CoreGui"))
+a.ResetOnSpawn = false
+Notifications.Parent = a
+
+----------------------------------------------------------------------------------------------------------------------------------------
 
 local SelectedTheme = RayfieldLibrary.Theme.Default
 
