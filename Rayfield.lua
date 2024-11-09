@@ -596,7 +596,7 @@ local function Hide(notify: boolean?)
 		if useMobileSizing then
 			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping 'Show Rayfield'.", Duration = 7})
 		else
-			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping K.", Duration = 7})
+			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping K.", Duration = 7}, Image = 6023426928)
 		end
 	end
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(0, 470, 0, 0)}):Play()
@@ -2669,6 +2669,7 @@ UserInputService.InputBegan:Connect(function(input, processed)
 			Unhide()
 		else
 			Hidden = true
+			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping K.", Duration = 7}, Image = 6023426928)
 			Hide()
 		end
 	end
