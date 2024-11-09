@@ -22,45 +22,45 @@ local RayfieldLibrary = {
 	Flags = {},
 	Theme = {
 		Default = {
-			TextColor = Color3.fromRGB(200, 200, 255), -- Light text for readability on dark background
+			TextColor = Color3.fromRGB(220, 220, 255), -- Light text for readability on dark background
 
-			Background = Color3.fromRGB(35, 30, 85), -- Deep background to match the dark blue-purple tone
-			Topbar = Color3.fromRGB(45, 40, 100), -- Slightly lighter for the top bar
-			Shadow = Color3.fromRGB(25, 20, 70), -- Subtle shadow for depth
+			Background = Color3.fromRGB(25, 25, 55), -- Deep dark blue background
+			Topbar = Color3.fromRGB(35, 35, 75), -- Slightly lighter dark blue for the top bar
+			Shadow = Color3.fromRGB(15, 15, 45), -- Subtle shadow for depth
 
-			NotificationBackground = Color3.fromRGB(53, 45, 126), -- Primary color for notifications
-			NotificationActionsBackground = Color3.fromRGB(48, 40, 116), -- Slight contrast for actions
+			NotificationBackground = Color3.fromRGB(30, 30, 70), -- Dark background for notifications
+			NotificationActionsBackground = Color3.fromRGB(45, 45, 85), -- Slight contrast for actions
 
-			TabBackground = Color3.fromRGB(40, 35, 100), -- Darker tab background to blend with the theme
-			TabStroke = Color3.fromRGB(60, 50, 140), -- Stroke to add separation
-			TabBackgroundSelected = Color3.fromRGB(53, 45, 126), -- Highlight for selected tab to match primary color
-			TabTextColor = Color3.fromRGB(180, 180, 240), -- Light text color for tab labels
+			TabBackground = Color3.fromRGB(40, 40, 80), -- Tab background matching dark tones
+			TabStroke = Color3.fromRGB(50, 50, 90), -- Tab stroke for separation
+			TabBackgroundSelected = Color3.fromRGB(60, 60, 100), -- Highlight for selected tab
+			TabTextColor = Color3.fromRGB(190, 190, 240), -- Muted light color for tab text
 			SelectedTabTextColor = Color3.fromRGB(240, 240, 255), -- Bright color for selected tab text
 
-			ElementBackground = Color3.fromRGB(53, 45, 126), -- Main element background color
-			ElementBackgroundHover = Color3.fromRGB(45, 38, 110), -- Darker shade on hover instead of black
-			SecondaryElementBackground = Color3.fromRGB(50, 42, 120), -- Unified look for labels/paragraphs
-			ElementStroke = Color3.fromRGB(70, 60, 160), -- Element stroke for borders
-			SecondaryElementStroke = Color3.fromRGB(70, 60, 160),
+			ElementBackground = Color3.fromRGB(35, 35, 75), -- Unified element background
+			ElementBackgroundHover = Color3.fromRGB(45, 45, 95), -- Slightly lighter on hover
+			SecondaryElementBackground = Color3.fromRGB(50, 50, 100), -- For labels/paragraphs
+			ElementStroke = Color3.fromRGB(55, 55, 105), -- Element stroke for borders
+			SecondaryElementStroke = Color3.fromRGB(55, 55, 105),
 
-			SliderBackground = Color3.fromRGB(100, 90, 170), -- Slider background to blend with theme
-			SliderProgress = Color3.fromRGB(120, 110, 190), -- Progress color for contrast
-			SliderStroke = Color3.fromRGB(90, 80, 160), -- Stroke to match the slider colors
+			SliderBackground = Color3.fromRGB(80, 80, 150), -- Slider background with subtle color
+			SliderProgress = Color3.fromRGB(100, 100, 200), -- Progress color with light blue tone
+			SliderStroke = Color3.fromRGB(90, 90, 180), -- Stroke to match theme
 
-			ToggleBackground = Color3.fromRGB(53, 45, 126), -- Toggle background in primary color
-			ToggleEnabled = Color3.fromRGB(90, 80, 200), -- Vibrant blue-purple for enabled toggle
-			ToggleDisabled = Color3.fromRGB(60, 50, 130), -- Muted for disabled toggle
-			ToggleEnabledStroke = Color3.fromRGB(110, 100, 220), -- Lighter stroke for enabled toggle
-			ToggleDisabledStroke = Color3.fromRGB(70, 60, 150), -- Subtle stroke for disabled
-			ToggleEnabledOuterStroke = Color3.fromRGB(40, 35, 100),
-			ToggleDisabledOuterStroke = Color3.fromRGB(50, 45, 110),
+			ToggleBackground = Color3.fromRGB(35, 35, 75), -- Matching dark toggle background
+			ToggleEnabled = Color3.fromRGB(120, 90, 255), -- Vibrant purple for enabled toggle
+			ToggleDisabled = Color3.fromRGB(80, 80, 120), -- Muted dark for disabled toggle
+			ToggleEnabledStroke = Color3.fromRGB(140, 110, 255), -- Lighter stroke for enabled
+			ToggleDisabledStroke = Color3.fromRGB(90, 90, 130), -- Subtle stroke for disabled
+			ToggleEnabledOuterStroke = Color3.fromRGB(50, 50, 90),
+			ToggleDisabledOuterStroke = Color3.fromRGB(60, 60, 100),
 
-			DropdownSelected = Color3.fromRGB(53, 45, 126), -- Main color for dropdown selection
-			DropdownUnselected = Color3.fromRGB(45, 40, 100), -- Slightly darker for unselected state
+			DropdownSelected = Color3.fromRGB(45, 45, 95), -- Dark tone for dropdown selection
+			DropdownUnselected = Color3.fromRGB(35, 35, 75), -- Matches other unselected backgrounds
 
-			InputBackground = Color3.fromRGB(53, 45, 126), -- Input background in primary color
-			InputStroke = Color3.fromRGB(80, 70, 150), -- Input border for distinction
-			PlaceholderColor = Color3.fromRGB(150, 140, 200) -- Subtle lighter color for placeholders
+			InputBackground = Color3.fromRGB(40, 40, 85), -- Dark input background
+			InputStroke = Color3.fromRGB(75, 75, 125), -- Input border for clarity
+			PlaceholderColor = Color3.fromRGB(130, 130, 180) -- Subtle light blue for placeholders
 		},
 
 		Light = {
@@ -211,7 +211,7 @@ if RunService:IsStudio() then
 end
 
 -- Interface Management
-local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://138479981673371")[1]
+local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://134415566685128")[1]
 
 Rayfield.Enabled = false
 
@@ -283,15 +283,6 @@ local Notifications = Rayfield.Notifications
 
 local SelectedTheme = RayfieldLibrary.Theme.Default
 
----------------------------------------------------------------------------------------------------------------------------------------- IMPORTANT
-
-local Notifications = Rayfield.Notifications:Clone()
-local a = Instance.new("ScreenGui", game:GetService("CoreGui"))
-a.ResetOnSpawn = false
-Notifications.Parent = a
-
-----------------------------------------------------------------------------------------------------------------------------------------
-
 local function ChangeTheme(ThemeName)
 	SelectedTheme = RayfieldLibrary.Theme[ThemeName]
 
@@ -327,6 +318,8 @@ local function ChangeTheme(ThemeName)
 	end
 
 end
+
+
 
 local function makeDraggable(object, dragObject, enableTaptic)
 	local dragging = false
@@ -600,7 +593,7 @@ local function Hide(notify: boolean?)
 		if useMobileSizing then
 			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping 'Show Rayfield'.", Duration = 7})
 		else
-			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping K.", Duration = 7, Image = "6023426928"})
+			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping K.", Duration = 7})
 		end
 	end
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(0, 470, 0, 0)}):Play()
@@ -899,8 +892,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 			while true do
 				task.wait(math.random(120, 600))
 				RayfieldLibrary:Notify({
-					Title = "Sanity Check",
-					Content = "Enjoying this script? Make sure to join the server in the info tab!",
+					Title = "Rayfield Interface",
+					Content = "Enjoying this script? Make sure to join discord.gg/expensivehub!",
 					Duration = 7,
 					Image = 4483362458,
 				})
@@ -988,7 +981,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end)
 				if not Success then
 					print("Rayfield | "..Key.." Error " ..tostring(Response))
-					
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 				end
 			end
 		end
@@ -1301,7 +1294,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 					TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Button.Title.Text = "Callback Error"
-					print("Callback Error " ..tostring(Response))
+					print("Rayfield | "..ButtonSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Button.Title.Text = ButtonSettings.Name
 					TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -1711,8 +1705,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Input.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Input.Title.Text = "Callback Error"
-					print("Callback Error " ..tostring(Response))
-					
+					print("Rayfield | "..InputSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Input.Title.Text = InputSettings.Name
 					TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -1934,8 +1928,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 							TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 							TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 							Dropdown.Title.Text = "Callback Error"
-							print("Callback Error " ..tostring(Response))
-							
+							print("Rayfield | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
+							warn('Check docs.sirius.menu for help with Rayfield specific development.')
 							task.wait(0.5)
 							Dropdown.Title.Text = DropdownSettings.Name
 							TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2022,8 +2016,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Dropdown.Title.Text = "Callback Error"
-					print("Callback Error " ..tostring(Response))
-					
+					print("Rayfield | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Dropdown.Title.Text = DropdownSettings.Name
 					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2136,8 +2130,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 							TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 							TweenService:Create(Keybind.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 							Keybind.Title.Text = "Callback Error"
-							print("Callback Error " ..tostring(Response))
-							
+							print("Rayfield | "..KeybindSettings.Name.." Callback Error " ..tostring(Response))
+							warn('Check docs.sirius.menu for help with Rayfield specific development.')
 							task.wait(0.5)
 							Keybind.Title.Text = KeybindSettings.Name
 							TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2256,8 +2250,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Toggle.Title.Text = "Callback Error"
-					print("Callback Error " ..tostring(Response))
-					
+					print("Rayfield | "..ToggleSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Toggle.Title.Text = ToggleSettings.Name
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2305,8 +2299,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Toggle.Title.Text = "Callback Error"
-					print("Callback Error " ..tostring(Response))
-					
+					print("Rayfield | "..ToggleSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Toggle.Title.Text = ToggleSettings.Name
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2444,8 +2438,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 								TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 								TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 								Slider.Title.Text = "Callback Error"
-								print("Callback Error " ..tostring(Response))
-								
+								print("Rayfield | "..SliderSettings.Name.." Callback Error " ..tostring(Response))
+								warn('Check docs.sirius.menu for help with Rayfield specific development.')
 								task.wait(0.5)
 								Slider.Title.Text = SliderSettings.Name
 								TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2472,8 +2466,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Slider.Title.Text = "Callback Error"
-					print("Callback Error " ..tostring(Response))
-					
+					print("Rayfield | "..SliderSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Slider.Title.Text = SliderSettings.Name
 					TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
