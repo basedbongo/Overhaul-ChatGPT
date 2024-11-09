@@ -268,6 +268,14 @@ local dragBarCosmetic = dragBar and dragBar.Drag or nil
 Rayfield.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 
+---------------------------------------------------------------------------------------------------------------------------------------- IMPORTANT
+
+local Notifications = Rayfield.Notifications:Clone()
+local a = Instance.new("ScreenGui", game:GetService("CoreGui"))
+a.ResetOnSpawn = false
+Notifications.Parent = a
+
+----------------------------------------------------------------------------------------------------------------------------------------
 
 
 -- Variables
