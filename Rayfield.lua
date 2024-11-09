@@ -38,7 +38,7 @@ local RayfieldLibrary = {
 			SelectedTabTextColor = Color3.fromRGB(240, 240, 255), -- Bright color for selected tab text
 
 			ElementBackground = Color3.fromRGB(53, 45, 126), -- Main element background color
-			ElementBackgroundHover = Color3.fromRGB(63, 55, 140), -- Slightly lighter for hover effect
+			ElementBackgroundHover = Color3.fromRGB(45, 38, 110), -- Darker shade on hover instead of black
 			SecondaryElementBackground = Color3.fromRGB(50, 42, 120), -- Unified look for labels/paragraphs
 			ElementStroke = Color3.fromRGB(70, 60, 160), -- Element stroke for borders
 			SecondaryElementStroke = Color3.fromRGB(70, 60, 160),
