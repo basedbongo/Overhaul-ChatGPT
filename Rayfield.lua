@@ -2670,7 +2670,7 @@ UserInputService.InputBegan:Connect(function(input, processed)
 		else
 			Hidden = true
 			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping K.", Duration = 7}, Image = 6023426928)
-			Hide()
+			Hide(true)
 		end
 	end
 end)
