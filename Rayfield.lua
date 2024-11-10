@@ -938,7 +938,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					Title = "Notice",
 					Content = "Enjoying this script? Make sure to join discord.gg/expensivehub!",
 					Duration = 7,
-					Image = 6034275731,
+					Image = 4483362458,
 				})
 			end
 		end)
@@ -2708,7 +2708,7 @@ UserInputService.InputBegan:Connect(function(input, processed)
 			Unhide()
 		else
 			Hidden = true
-			Hide(true)
+			Hide()
 		end
 	end
 end)
