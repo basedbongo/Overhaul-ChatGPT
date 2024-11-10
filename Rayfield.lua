@@ -934,7 +934,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				task.wait(math.random(120, 600))
 				RayfieldLibrary:Notify({
 					Title = "Notice",
-					Content = "Enjoying this script? Make sure to join discord.gg/expensivehub!",
+					Content = "Enjoying this script? Make sure to join discord.gg/qgpMrcUBdD!",
 					Duration = 7,
 					Image = 6034275731,
 				})
