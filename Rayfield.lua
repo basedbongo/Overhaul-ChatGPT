@@ -2708,7 +2708,7 @@ UserInputService.InputBegan:Connect(function(input, processed)
 			Unhide()
 		else
 			Hidden = true
-			Hide(true)
+			Hide()
 		end
 	end
 end)
