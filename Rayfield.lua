@@ -5,7 +5,6 @@ by Sirius
 
 shlex | Designing + Programming
 iRay  | Programming
-speakingheademoji | Custom UI + Fxing
 
 ]]
 
