@@ -12,7 +12,7 @@ speakingheademoji | Fixing + Custom Theme
 
 
 local Release = "Custom Build"
-local RayfieldFolder = "OVERHAULCOREFOLDER"
+local RayfieldFolder = "EXPENSIVECOREFOLDER"
 local ConfigurationFolder = RayfieldFolder.."/Configurations"
 local ConfigurationExtension = ".txt"
 
@@ -115,7 +115,7 @@ local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 
 -- Interface Management
-local Rayfield = game:GetObjects("rbxassetid://138479981673371")[1]
+local Rayfield = game:GetObjects("rbxassetid://134415566685128")[1]
 
 ---------------------------------------------------------------------------------------------------------------------------------------- IMPORTANT
 
@@ -520,6 +520,7 @@ local function Hide(notify: boolean?)
 	TweenService:Create(Main.Topbar.Divider, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 	TweenService:Create(Main.Topbar.CornerRepair, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 	TweenService:Create(Main.Topbar.Title, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(Main.Topbar.ImageLabel, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {ImageTransparency = 1}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {ImageTransparency = 1}):Play()
 	TweenService:Create(Topbar.UIStroke, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 
@@ -646,6 +647,7 @@ local function Unhide()
 	TweenService:Create(Main.Topbar.Divider, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Topbar.CornerRepair, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Topbar.Title, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+	TweenService:Create(Main.Topbar.ImageLabel, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
 
 	if MPrompt then
 		TweenService:Create(MPrompt, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(0, 40, 0, 10), Position = UDim2.new(0.5, 0, 0, -50), BackgroundTransparency = 1}):Play()
@@ -799,7 +801,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				task.wait(math.random(120, 600))
 				RayfieldLibrary:Notify({
 					Title = "Notice",
-					Content = "Enjoying this script? Make sure to join https://discord.gg/qgpMrcUBdD!",
+					Content = "Enjoying this script? Make sure to join discord.gg/expensivehub!",
 					Duration = 7,
 					Image = 6034275731,
 				})
