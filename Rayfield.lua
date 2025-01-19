@@ -121,6 +121,7 @@ local Rayfield = game:GetObjects("rbxassetid://138479981673371")[1]
 
 local Notifications = Rayfield.Notifications:Clone()
 local a = Instance.new("ScreenGui", game:GetService("CoreGui"))
+a.Name = "NOTIFICATIONSYSTEM"
 a.ResetOnSpawn = false
 Notifications.Parent = a
 
@@ -168,25 +169,17 @@ local function SaveConfiguration()
 	writefile(configFile, HttpService:JSONEncode(Data))
 end
 
-if gethui then
-	for _, Interface in ipairs(gethui():GetChildren()) do
-		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
-			Interface.Enabled = false
-			Interface.Name = "Rayfield-Old"
-			SaveConfiguration()
-			a:Destroy()
-		end
-	end
-elseif not useStudio then
-	for _, Interface in ipairs(CoreGui:GetChildren()) do
-		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
-			Interface.Enabled = false
-			Interface.Name = "Rayfield-Old"
-			SaveConfiguration()
-			a:Destroy()
-		end
+for _, Interface in ipairs(CoreGui:GetChildren()) do
+	if Interface.Name == "Rayfield" then
+		Interface.Enabled = false
+		Interface.Name = "Rayfield-Old"
+		SaveConfiguration()
+		a:Destroy()
 	end
 end
+
+if CoreGui:FindFirstChild("ChatSystem") then CoreGui:FindFirstChild("ChatSystem"):Destroy() end
+
 
 local minSize = Vector2.new(1024, 768)
 local useMobileSizing
