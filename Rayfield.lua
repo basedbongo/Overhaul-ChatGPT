@@ -172,7 +172,6 @@ end
 for _, Interface in ipairs(CoreGui:GetChildren()) do
 	if Interface.Name == "Rayfield" then
 		Interface.Enabled = false
-		Interface.Name = "Rayfield-Old"
 		SaveConfiguration()
 		a:Destroy()
 	end
