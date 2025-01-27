@@ -4,10 +4,11 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
 local localPlayer = Players.LocalPlayer
-local enabled = true
-local useTeamColors = true
-local showNames = true
-local showDistance = true
+local camera = game.Workspace.CurrentCamera
+local enabled = false
+local useTeamColors = false
+local showNames = false
+local showDistance = false
 local showTracers = false
 
 local playerESPInstances = {}
@@ -62,17 +63,15 @@ local function createESP(player)
         espData.textLabel = textLabel
     end
 
-    local function addTracer(character)
-        local tracer = Instance.new("LineHandleAdornment")
-        tracer.Length = 0
-        tracer.Color3 = Color3.fromRGB(255, 255, 255)
-        tracer.Transparency = 0.5
-        tracer.Adornee = character:WaitForChild("Head", 10)
-        tracer.Thickness = 2
-        tracer.Parent = character:FindFirstChild("HumanoidRootPart")
-        tracer.ZIndex = 1
+    local tracerLine
+    local function addTracer()
+        tracerLine = Drawing.new("Line")
+        tracerLine.Visible = false
+        tracerLine.Thickness = 1.5
+        tracerLine.Transparency = 1
+        tracerLine.Color = Color3.fromRGB(255, 255, 255)
 
-        espData.tracer = tracer
+        espData.tracer = tracerLine
     end
 
     local function updateESP()
@@ -80,20 +79,30 @@ local function createESP(player)
 
         local character = player.Character
         local head = character and character:FindFirstChild("Head")
-        local rootPart = character and character:FindFirstChild("HumanoidRootPart")
         local localHead = localPlayer.Character and localPlayer.Character:FindFirstChild("Head")
 
-        if head and rootPart and localHead then
+        if head and localHead then
+            local headPosition, onScreen = camera:WorldToViewportPoint(head.Position)
             local distance = (localHead.Position - head.Position).Magnitude
+
             espData.textLabel.Text = (showNames and player.Name or "") .. (showDistance and ("\n" .. math.floor(distance) .. " studs") or "")
-            espData.tracer.Length = showTracers and distance or 0
+
+            if showTracers and onScreen then
+                tracerLine.Visible = true
+                tracerLine.From = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y) -- Bottom center of the screen
+                tracerLine.To = Vector2.new(headPosition.X, headPosition.Y)
+            else
+                tracerLine.Visible = false
+            end
+        else
+            tracerLine.Visible = false
         end
     end
 
     local function onCharacterAdded(character)
         addHighlight(character)
         addBillboardGui(character)
-        addTracer(character)
+        addTracer()
 
         RunService.RenderStepped:Connect(updateESP)
     end
@@ -111,7 +120,7 @@ local function removeESP(player)
     if espData then
         if espData.highlight then espData.highlight:Destroy() end
         if espData.billboardGui then espData.billboardGui:Destroy() end
-        if espData.tracer then espData.tracer:Destroy() end
+        if espData.tracer then espData.tracer:Remove() end
     end
     playerESPInstances[player] = nil
 end
