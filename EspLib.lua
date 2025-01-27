@@ -21,6 +21,7 @@ local function createESP(player)
         highlight.Adornee = character
         highlight.FillTransparency = 0.7
         highlight.OutlineTransparency = 0.3
+        highlight.Enabled = enabled
         highlight.Parent = character
 
         espData.highlight = highlight
@@ -48,6 +49,7 @@ local function createESP(player)
         billboardGui.Size = UDim2.new(0, 200, 0, 50)
         billboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
         billboardGui.AlwaysOnTop = true
+        billboardGui.Enabled = enabled
         billboardGui.Parent = head
 
         local textLabel = Instance.new("TextLabel")
@@ -76,6 +78,8 @@ local function createESP(player)
 
     local function updateESP()
         if not enabled then
+            if espData.tracer then espData.tracer.Visible = false end
+            if espData.billboardGui then espData.billboardGui.Enabled = false end
             return
         end
 
@@ -108,7 +112,7 @@ local function createESP(player)
         addBillboardGui(character)
         addTracer()
 
-        RunService.RenderStepped:Connect(updateESP)
+        espData.tracerConnection = RunService.RenderStepped:Connect(updateESP)
     end
 
     player.CharacterAdded:Connect(onCharacterAdded)
@@ -125,6 +129,7 @@ local function removeESP(player)
         if espData.highlight then espData.highlight:Destroy() end
         if espData.billboardGui then espData.billboardGui:Destroy() end
         if espData.tracer then espData.tracer:Remove() end
+        if espData.tracerConnection then espData.tracerConnection:Disconnect() end
     end
     playerESPInstances[player] = nil
 end
