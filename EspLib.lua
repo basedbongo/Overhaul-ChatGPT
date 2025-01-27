@@ -75,6 +75,10 @@ local function createESP(player)
     end
 
     local function updateESP()
+        if not enabled then
+            return
+        end
+
         if not espData.billboardGui or not espData.textLabel or not espData.tracer then return end
 
         local character = player.Character
