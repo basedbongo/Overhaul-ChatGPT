@@ -4,7 +4,7 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
 local localPlayer = Players.LocalPlayer
-local camera = game.Workspace.CurrentCamera
+local camera = workspace.CurrentCamera
 local enabled = false
 local useTeamColors = false
 local showNames = false
@@ -30,7 +30,7 @@ local function createESP(player)
                 highlight.FillColor = player.Team.TeamColor.Color
                 highlight.OutlineColor = Color3.new(1, 1, 1)
             else
-                highlight.FillColor = Color3.new(0.5, 0.5, 0.5)
+                highlight.FillColor = Color3.new(1, 1, 1)
                 highlight.OutlineColor = Color3.new(1, 1, 1)
             end
         end
@@ -53,11 +53,21 @@ local function createESP(player)
         local textLabel = Instance.new("TextLabel")
         textLabel.Size = UDim2.new(1, 0, 1, 0)
         textLabel.BackgroundTransparency = 1
-        textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
         textLabel.TextStrokeTransparency = 0.5
         textLabel.TextSize = 14
         textLabel.Font = Enum.Font.SourceSansBold
         textLabel.Parent = billboardGui
+
+        local function updateHighlightColor()
+            if player.Team and useTeamColors then
+                textLabel.TextColor3 = player.Team.TeamColor.Color
+            else
+                textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            end
+        end
+
+        updateHighlightColor()
+        player:GetPropertyChangedSignal("Team"):Connect(updateHighlightColor)
 
         espData.billboardGui = billboardGui
         espData.textLabel = textLabel
@@ -69,11 +79,22 @@ local function createESP(player)
         tracerLine.Visible = false
         tracerLine.Thickness = 1.5
         tracerLine.Transparency = 1
-        tracerLine.Color = Color3.fromRGB(255, 255, 255)
+
+        local function updateHighlightColor()
+            if player.Team and useTeamColors then
+                tracerLine.Color = player.Team.TeamColor.Color
+            else
+                tracerLine.Color = Color3.fromRGB(255, 255, 255)
+            end
+        end
+
+        updateHighlightColor()
+        player:GetPropertyChangedSignal("Team"):Connect(updateHighlightColor)
 
         espData.tracer = tracerLine
     end
 
+    local updateConnection
     local function updateESP()
         if not espData.billboardGui or not espData.textLabel or not espData.tracer then return end
 
@@ -87,24 +108,31 @@ local function createESP(player)
 
             espData.textLabel.Text = (showNames and player.Name or "") .. (showDistance and ("\n" .. math.floor(distance) .. " studs") or "")
 
-            if showTracers and onScreen then
-                tracerLine.Visible = true
-                tracerLine.From = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y) -- Bottom center of the screen
-                tracerLine.To = Vector2.new(headPosition.X, headPosition.Y)
+            if enabled and showTracers and onScreen then
+                espData.tracer.Visible = true
+                espData.tracer.From = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y)
+                espData.tracer.To = Vector2.new(headPosition.X, headPosition.Y)
             else
-                tracerLine.Visible = false
+                espData.tracer.Visible = false
             end
         else
-            tracerLine.Visible = false
+            espData.tracer.Visible = false
         end
     end
 
     local function onCharacterAdded(character)
+        if not enabled then return end
+
+        if espData.highlight then espData.highlight:Destroy() end
+        if espData.billboardGui then espData.billboardGui:Destroy() end
+        if espData.tracer then espData.tracer:Remove() end
+        if espData.updateConnection then espData.updateConnection:Disconnect() end
+
         addHighlight(character)
         addBillboardGui(character)
         addTracer()
 
-        RunService.RenderStepped:Connect(updateESP)
+        espData.updateConnection = RunService.RenderStepped:Connect(updateESP)
     end
 
     player.CharacterAdded:Connect(onCharacterAdded)
@@ -120,17 +148,29 @@ local function removeESP(player)
     if espData then
         if espData.highlight then espData.highlight:Destroy() end
         if espData.billboardGui then espData.billboardGui:Destroy() end
-        if espData.tracer then espData.tracer:Remove() end
+        if espData.tracer then 
+            espData.tracer.Visible = false
+            espData.tracer:Remove() 
+        end
+        if espData.updateConnection then
+            espData.updateConnection:Disconnect()
+        end
     end
     playerESPInstances[player] = nil
 end
 
 function ESP:Toggle(state)
     enabled = state
-    for player, espData in pairs(playerESPInstances) do
-        if espData.highlight then espData.highlight.Enabled = enabled end
-        if espData.billboardGui then espData.billboardGui.Enabled = enabled end
-        if espData.tracer then espData.tracer.Visible = enabled end
+    if enabled then
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= localPlayer then
+                createESP(player)
+            end
+        end
+    else
+        for player, _ in pairs(playerESPInstances) do
+            removeESP(player)
+        end
     end
 end
 
@@ -142,6 +182,20 @@ function ESP:ToggleTeamColor(state)
                 espData.highlight.FillColor = player.Team.TeamColor.Color
             else
                 espData.highlight.FillColor = Color3.new(0.5, 0.5, 0.5)
+            end
+        end
+        if espData.textLabel then
+            if player.Team and useTeamColors then
+                espData.textLabel.TextColor3 = player.Team.TeamColor.Color
+            else
+                espData.textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            end
+        end
+        if espData.tracer then
+            if player.Team and useTeamColors then
+                espData.tracer.Color = player.Team.TeamColor.Color
+            else
+                espData.tracer.Color = Color3.fromRGB(255, 255, 255)
             end
         end
     end
@@ -157,6 +211,11 @@ end
 
 function ESP:ToggleTracers(state)
     showTracers = state
+    for player, espData in pairs(playerESPInstances) do
+        if espData.tracer then
+            espData.tracer.Visible = state and enabled
+        end
+    end
 end
 
 function ESP:Init()
@@ -175,4 +234,4 @@ function ESP:Init()
     Players.PlayerRemoving:Connect(removeESP)
 end
 
-return ESP 
+return ESP
