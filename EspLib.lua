@@ -13,6 +13,13 @@ local showTracers = false
 
 local playerESPInstances = {}
 
+local function updateESPColors(player, espData)
+    local color = (player.Team and useTeamColors) and player.Team.TeamColor.Color or Color3.fromRGB(255, 255, 255)
+    if espData.highlight then espData.highlight.FillColor = color end
+    if espData.textLabel then espData.textLabel.TextColor3 = color end
+    if espData.tracer then espData.tracer.Color = color end
+end
+
 local function createESP(player)
     local espData = {}
 
@@ -22,25 +29,12 @@ local function createESP(player)
         highlight.FillTransparency = 0.7
         highlight.OutlineTransparency = 0.3
         highlight.Parent = character
-
         espData.highlight = highlight
-
-        local function updateHighlightColor()
-            if player.Team and useTeamColors then
-                highlight.FillColor = player.Team.TeamColor.Color
-                highlight.OutlineColor = Color3.new(1, 1, 1)
-            else
-                highlight.FillColor = Color3.new(1, 1, 1)
-                highlight.OutlineColor = Color3.new(1, 1, 1)
-            end
-        end
-
-        updateHighlightColor()
-        player:GetPropertyChangedSignal("Team"):Connect(updateHighlightColor)
+        updateESPColors(player, espData)
     end
 
     local function addBillboardGui(character)
-        local head = character:WaitForChild("Head", 10)
+        local head = character:FindFirstChild("Head")
         if not head then return end
 
         local billboardGui = Instance.new("BillboardGui")
@@ -48,7 +42,7 @@ local function createESP(player)
         billboardGui.Size = UDim2.new(0, 200, 0, 50)
         billboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
         billboardGui.AlwaysOnTop = true
-        billboardGui.Parent = head
+        billboardGui.Parent = character
 
         local textLabel = Instance.new("TextLabel")
         textLabel.Size = UDim2.new(1, 0, 1, 0)
@@ -58,45 +52,22 @@ local function createESP(player)
         textLabel.Font = Enum.Font.SourceSansBold
         textLabel.Parent = billboardGui
 
-        local function updateHighlightColor()
-            if player.Team and useTeamColors then
-                textLabel.TextColor3 = player.Team.TeamColor.Color
-            else
-                textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            end
-        end
-
-        updateHighlightColor()
-        player:GetPropertyChangedSignal("Team"):Connect(updateHighlightColor)
-
         espData.billboardGui = billboardGui
         espData.textLabel = textLabel
+        updateESPColors(player, espData)
     end
 
-    local tracerLine
     local function addTracer()
-        tracerLine = Drawing.new("Line")
-        tracerLine.Visible = false
-        tracerLine.Thickness = 1.5
-        tracerLine.Transparency = 1
-
-        local function updateHighlightColor()
-            if player.Team and useTeamColors then
-                tracerLine.Color = player.Team.TeamColor.Color
-            else
-                tracerLine.Color = Color3.fromRGB(255, 255, 255)
-            end
-        end
-
-        updateHighlightColor()
-        player:GetPropertyChangedSignal("Team"):Connect(updateHighlightColor)
-
-        espData.tracer = tracerLine
+        local tracer = Drawing.new("Line")
+        tracer.Visible = false
+        tracer.Thickness = 1.5
+        tracer.Transparency = 1
+        espData.tracer = tracer
+        updateESPColors(player, espData)
     end
 
-    local updateConnection
     local function updateESP()
-        if not espData.billboardGui or not espData.textLabel or not espData.tracer then return end
+        if not espData.textLabel or not espData.tracer then return end
 
         local character = player.Character
         local head = character and character:FindFirstChild("Head")
@@ -105,7 +76,6 @@ local function createESP(player)
         if head and localHead then
             local headPosition, onScreen = camera:WorldToViewportPoint(head.Position)
             local distance = (localHead.Position - head.Position).Magnitude
-
             espData.textLabel.Text = (showNames and player.Name or "") .. (showDistance and ("\n" .. math.floor(distance) .. " studs") or "")
 
             if enabled and showTracers and onScreen then
@@ -121,17 +91,10 @@ local function createESP(player)
     end
 
     local function onCharacterAdded(character)
-        if not enabled then return end
-
-        if espData.highlight then espData.highlight:Destroy() end
-        if espData.billboardGui then espData.billboardGui:Destroy() end
-        if espData.tracer then espData.tracer:Remove() end
-        if espData.updateConnection then espData.updateConnection:Disconnect() end
-
+        removeESP(player)  -- Ensure cleanup before adding new ESP
         addHighlight(character)
         addBillboardGui(character)
         addTracer()
-
         espData.updateConnection = RunService.RenderStepped:Connect(updateESP)
     end
 
@@ -148,28 +111,21 @@ local function removeESP(player)
     if espData then
         if espData.highlight then espData.highlight:Destroy() end
         if espData.billboardGui then espData.billboardGui:Destroy() end
-        if espData.tracer then 
-            espData.tracer.Visible = false
-            espData.tracer:Remove() 
-        end
-        if espData.updateConnection then
-            espData.updateConnection:Disconnect()
-        end
+        if espData.tracer then espData.tracer:Remove() end
+        if espData.updateConnection then espData.updateConnection:Disconnect() end
     end
     playerESPInstances[player] = nil
 end
 
 function ESP:Toggle(state)
     enabled = state
-    if enabled then
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= localPlayer then
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= localPlayer then
+            if enabled then
                 createESP(player)
+            else
+                removeESP(player)
             end
-        end
-    else
-        for player, _ in pairs(playerESPInstances) do
-            removeESP(player)
         end
     end
 end
@@ -177,27 +133,7 @@ end
 function ESP:ToggleTeamColor(state)
     useTeamColors = state
     for player, espData in pairs(playerESPInstances) do
-        if espData.highlight then
-            if player.Team and useTeamColors then
-                espData.highlight.FillColor = player.Team.TeamColor.Color
-            else
-                espData.highlight.FillColor = Color3.new(0.5, 0.5, 0.5)
-            end
-        end
-        if espData.textLabel then
-            if player.Team and useTeamColors then
-                espData.textLabel.TextColor3 = player.Team.TeamColor.Color
-            else
-                espData.textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            end
-        end
-        if espData.tracer then
-            if player.Team and useTeamColors then
-                espData.tracer.Color = player.Team.TeamColor.Color
-            else
-                espData.tracer.Color = Color3.fromRGB(255, 255, 255)
-            end
-        end
+        updateESPColors(player, espData)
     end
 end
 
@@ -211,9 +147,9 @@ end
 
 function ESP:ToggleTracers(state)
     showTracers = state
-    for player, espData in pairs(playerESPInstances) do
+    for _, espData in pairs(playerESPInstances) do
         if espData.tracer then
-            espData.tracer.Visible = state and enabled
+            espData.tracer.Visible = showTracers and enabled
         end
     end
 end
@@ -224,13 +160,11 @@ function ESP:Init()
             createESP(player)
         end
     end
-
     Players.PlayerAdded:Connect(function(player)
         if player ~= localPlayer then
             createESP(player)
         end
     end)
-
     Players.PlayerRemoving:Connect(removeESP)
 end
 
